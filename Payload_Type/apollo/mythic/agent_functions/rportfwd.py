@@ -9,12 +9,25 @@ class PortFwdArguments(TaskArguments):
 
     def __init__(self, command_line):
         super().__init__(command_line)
-        self.args = {
-            "action": CommandParameter(name="action", choices=["start","stop","list","flush"], required=True, type=ParameterType.ChooseOne, description="Start,stop or list the port forward."),
-            "port": CommandParameter(name="Local Port", required=False, type=ParameterType.Number, description="Port to listen on C2."),
-            "rport": CommandParameter(name="Remote Port", required=False, type=ParameterType.Number, description="Port to be forwarded."),
-            "rip": CommandParameter(name="Remote Ip", required=False, type=ParameterType.String, description="IP to be forwarded."),
-        }
+        self.args = [
+            CommandParameter(name="action",
+                             choices=["start","stop","list","flush"],
+                             required=True,
+                             type=ParameterType.ChooseOne,
+                             description="Start,stop or list the port forward."),
+            CommandParameter(name="Local Port",
+                             required=False,
+                             type=ParameterType.Number,
+                             description="Port to listen on C2."),
+            CommandParameter(name="Remote Port",
+                             required=False,
+                             type=ParameterType.Number,
+                             description="Port to be forwarded."),
+            CommandParameter(name="Remote Ip",
+                             required=False,
+                             type=ParameterType.String,
+                             description="IP to be forwarded.")
+        ]
 
     async def parse_arguments(self):
         try:
